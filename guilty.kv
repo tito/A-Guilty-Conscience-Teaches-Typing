@@ -1,10 +1,14 @@
 #:kivy 1.6.0
 
-<Stream>
-	canvas:
-		Rectangle:
-			size: self.size
-			pos: self.pos
+<Letter>
+	canvas.before:
+		PushMatrix
+		Rotate:
+			angle: 0
+			origin: self.center
+	canvas.after:
+		PopMatrix
+
 
 <GuiltyGame>
 	stream: stream
