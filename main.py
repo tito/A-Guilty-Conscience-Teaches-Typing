@@ -12,10 +12,11 @@ from kivy.uix.relativelayout import RelativeLayout
 
 
 class Letter(Label):
-    angle = NumericProperty()
+    angular = NumericProperty()
 
     def __init__(self, **kwargs):
         super(Letter, self).__init__(**kwargs)
+        self.angular = 0
 
 
 
@@ -24,7 +25,7 @@ class Word(RelativeLayout):
     def __init__(self, **kwargs):
         super(Word, self).__init__(**kwargs)
         
-        self.text = text
+        self.text = kwargs.get('text')
         self.letters = []
         spacing_x = 0
         letternumber = 0
@@ -44,6 +45,13 @@ class Word(RelativeLayout):
         
         self.length_x = spacing_x #This is the easiest way I know to get the width, in x, of my Word class. Maybe kivy provides another way?
 
+    
+    def explode(self):
+                #num = 0
+        #for x in self.children:
+        #    self.letters[num].angular += 120*dt #dt is current framerate. 
+        #    num += 1
+
 
 
 class Stream(RelativeLayout):
@@ -54,10 +62,10 @@ class Stream(RelativeLayout):
 
 
     def loadstory(self):
-        story = "And then she was there. Across the salad bar."
-        #storyfile = open(dirname(abspath(__file__))+"/data/story.txt", "r")
-        #story = storyfile.read().split("|")
-        #storyfile.close()
+        #story = "And then she was there. Across the salad bar."  # <-- Sample story.
+        storyfile = open(dirname(abspath(__file__))+"/data/story.txt", "r")
+        story = storyfile.read().split("|")
+        storyfile.close()
 
         paragraph = []
         cue_Rachel = []
@@ -74,17 +82,13 @@ class Stream(RelativeLayout):
                 cue_tears.append(len(paragraph))
             else:
                 paragraph.append(Word(text=eachword, x=spacing_x, y=self.y)) #Filling the list with instances of Word.
-            spacing_x += paragraph[wordnumber].length_x
+                spacing_x += paragraph[wordnumber].length_x
 
         wordnumber += 1
 
 
     def move(self, dt):
         self.x += 1
-        num = 0
-        for x in self.children:
-            self.letters[num].angular += 120*dt #dt is current framerate. 
-            num += 1
 
 
 
@@ -99,7 +103,7 @@ class GuiltyApp(App):
 
     def build(self):
         game = GuiltyGame()
-        #Clock.schedule_interval(game.update, 1.0/60.0)
+        Clock.schedule_interval(game.update, 1.0/60.0)
         return game
 
 
