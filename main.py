@@ -46,7 +46,7 @@ class Word(RelativeLayout):
         self.length_x = spacing_x #This is the easiest way I know to get the width, in x, of my Word class. Maybe kivy provides another way?
 
     
-    def explode(self):
+    #def explode(self):
                 #num = 0
         #for x in self.children:
         #    self.letters[num].angular += 120*dt #dt is current framerate. 
@@ -81,7 +81,7 @@ class Stream(RelativeLayout):
             elif eachword == "^t":
                 cue_tears.append(len(paragraph))
             else:
-                paragraph.append(Word(text=eachword, x=spacing_x, y=self.y)) #Filling the list with instances of Word.
+                paragraph.append(Word(text=eachword, x=self.x+spacing_x, y=self.y)) #Filling the list with instances of Word.
                 spacing_x += paragraph[wordnumber].length_x
 
         wordnumber += 1
