@@ -82,6 +82,7 @@ class Stream(RelativeLayout):
                 cue_tears.append(len(paragraph))
             else:
                 paragraph.append(Word(text=eachword, x=self.x+spacing_x, y=self.y)) #Filling the list with instances of Word.
+                self.add_widget(paragraph[wordnumber])
                 spacing_x += paragraph[wordnumber].length_x
 
         wordnumber += 1
@@ -89,6 +90,7 @@ class Stream(RelativeLayout):
 
     def move(self, dt):
         self.x += 1
+        print self.x
 
 
 
