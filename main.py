@@ -9,6 +9,8 @@ from kivy.uix.label import Label
 from kivy.animation import Animation
 from kivy.uix.relativelayout import RelativeLayout
 
+from kivy.core.text import Label as Text
+from kivy.graphics import Color, Rectangle
 
 
 class Letter(Label):
@@ -17,6 +19,10 @@ class Letter(Label):
     def __init__(self, **kwargs):
         super(Letter, self).__init__(**kwargs)
         self.angular = 0
+
+        texture = Text('logo.png').texture
+        with self.canvas:
+            Rectangle(texture=texture, pos=self.pos, size=self.size)
 
 
 
@@ -88,8 +94,8 @@ class Stream(RelativeLayout):
 
 
     def move(self, dt):
-        self.x += 60*dt
-        print dt
+        self.x -= 60*dt
+        #print dt
 
 
 
