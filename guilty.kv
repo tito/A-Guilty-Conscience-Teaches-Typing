@@ -1,11 +1,19 @@
 #:kivy 1.6.0
 
 <Letter>
+	size_hint: None, None
 	canvas.before:
 		PushMatrix
 		Rotate:
 			angle: self.angular
 			origin: self.center
+	canvas:
+		Color:
+			rgb: 1, 1, 1
+		Rectangle:
+			texture: self.texture
+			pos: self.pos
+			size: self.texture_size
 	canvas.after:
 		PopMatrix
 
@@ -14,5 +22,5 @@
 
 	Stream:
 		id: stream
-		x: self.x
-		center_y: root.center_y
+		y: root.center_y - 20
+		x: root.center_x
